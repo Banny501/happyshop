@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
+{% load core_tags %}
 
 {% block content %}
     <!-- Section-->
         <section class="">
             <div class="container-fluid">
                 <div class="row">
-                    <h1>Shop</h1>
+                    {% show_categories cat_selected=cat_selected %}
+                    {% show_products category=category %}
                 </div>
             </div>
         </section>

@@ -7,7 +7,7 @@ BITCOIN_SYMBOL = u"\u20BF"
 class Product(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name="Название")
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Цена")
-    old_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Цена", blank=True, null=True)
+    old_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Старая Цена", blank=True, null=True)
     sale = models.BooleanField(default=False, verbose_name="Скидка")
     description = models.TextField(blank=True, verbose_name="Описание")
     image = models.ImageField(upload_to="products/", verbose_name="Фото")

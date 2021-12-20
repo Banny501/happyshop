@@ -1,0 +1,9 @@
+{% load core_tags %}
+
+{% for menu_item in menu %}
+    {% if menu_selected == menu_item.title %}
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url menu_item.url_name %}">{{menu_item.title}}</a></li>
+    {% else %}
+        <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url menu_item.url_name %}">{{menu_item.title}}</a></li>
+    {% endif %}
+{% endfor %}

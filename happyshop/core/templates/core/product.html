@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
-{% load shop_tags %}
+{% load static %}
+{% load core_tags %}
+
+{% block title %}
+    {% if category %}{{ category.title }}{% else %}Products{% endif %}
+{% endblock %}
 
 {% block content %}
     <!-- Section-->
@@ -8,9 +13,17 @@
                 <div class="row">
                     {% show_categories cat_selected=cat_selected %}
                     <div class="col">
-                        <h1>Product</h1>
+                        <div class="row product-detail">
+                                <img class=" float-start" width="230" height="230" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "core/images/no_image.jpg" %}{% endif %}">
+                                <h1>{{ product.name }}</h1>
+                                <h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
+                                <p class="price">${{ product.price }}</p>
+                                {{ product.description|linebreaks }}
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 {% endblock content %}
+
+
