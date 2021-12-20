@@ -1,0 +1,37 @@
+<div class="col-2 bg-white">
+    <h4 class="text-muted px-2 mt-2">
+        Categories:
+    </h4>
+    <ul class="nav nav-pills flex-column mb-auto">
+        {% if cat_selected == 0 %}
+            <li class="nav-item">
+                <span class="nav-link text-white bg-secondary active">
+                  <strong>All categories</strong>
+                </span>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a href="{% url 'shop' %}" class="nav-link text-dark" aria-current="page">
+                  <strong>All categories</strong>
+                </a>
+            </li>
+        {% endif %}
+        {% for category_item in categories %}
+            {% if category_item.product__count > 0 %}
+                {% if category_item.pk == cat_selected %}
+                    <li class="nav-item">
+                        <a href="{{ category_item.get_absolute_url }}" class="nav-link text-white bg-secondary active" aria-current="page">
+                            <strong>{{ category_item.name }}</strong>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a href="{{ category_item.get_absolute_url }}" class="nav-link text-dark" aria-current="page">
+                            <strong>{{ category_item.name }}</strong>
+                        </a>
+                    </li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>
