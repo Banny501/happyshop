@@ -32,6 +32,9 @@ class Product(models.Model):
     def get_price(self):
         return "{:.1f} ".format(self.price) + BITCOIN_SYMBOL
 
+    def get_old_price(self):
+        return "{:.1f} ".format(self.old_price)
+
 
 class Category(models.Model):
     name = models.CharField(max_length=100, db_index=True, unique=True, verbose_name="Название")

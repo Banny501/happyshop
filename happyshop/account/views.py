@@ -1,4 +1,4 @@
-from core.utils import DataMixin
+from core.services import DataMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 

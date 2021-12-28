@@ -23,19 +23,19 @@
                             </h5>
                             <!-- Product price-->
                             {% if product.sale %}
-                                <span class="text-muted text-decoration-line-through">{{ product.old_price }}</span>
+                                <span class="text-muted text-decoration-line-through">{{ product.get_old_price }}</span>
                             {% endif %}
                             <p>{{  product.get_price }}</p>
                         </div>
                     </div>
                     <!-- Product actions-->
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                        <div class="text-center">
+                            <button onclick="add_product_to_cart(url='{% url 'cart_add' %}',product_slug='{{ product.slug }}')" class="btn btn-outline-dark mt-auto">Add to cart</button>
+                        </div>
                     </div>
                 </div>
             </div>
         {% endfor %}
     </div>
 </div>
-
-

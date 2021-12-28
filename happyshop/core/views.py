@@ -1,7 +1,7 @@
 from django.views.generic import ListView, TemplateView, DetailView
 
 from .models import Product, Category
-from .utils import DataMixin
+from .services import DataMixin
 
 TEMPLATE_NAME = "HappyShop"
 
@@ -27,21 +27,21 @@ class ShopView(DataMixin, ListView):
         return dict(list(context.items()) + list(c_def.items()))
 
 
-class CategoryPage(DataMixin, DetailView):
+class CategoryView(DataMixin, DetailView):
     model = Category
     template_name = 'core/shop.html'
     slug_url_kwarg = 'category_slug'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title="Shop - " + TEMPLATE_NAME,
+        c_def = self.get_user_context(title=str(context['category']) + " - " + TEMPLATE_NAME,
                                       category=self.kwargs.get(self.slug_url_kwarg, None),
                                       cat_selected=context['category'].id,
                                       menu_selected="Shop")
         return dict(list(context.items()) + list(c_def.items()))
 
 
-class ProductPage(DataMixin, DetailView):
+class ProductView(DataMixin, DetailView):
     model = Product
     slug_url_kwarg = 'product_slug'
     context_object_name = 'product'
@@ -73,3 +73,6 @@ class ContactView(DataMixin, TemplateView):
         c_def = self.get_user_context(title="Contact - " + TEMPLATE_NAME,
                                       menu_selected="Contact")
         return dict(list(context.items()) + list(c_def.items()))
+
+
+

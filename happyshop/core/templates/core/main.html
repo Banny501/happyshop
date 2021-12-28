@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load core_tags %}
 
 {% block header %}
     {% include 'layers/_header.html' %}
@@ -9,7 +10,7 @@
         <section class="py-5">
             <div class="container-fluid px-4 px-lg-5 mt-5">
                 <div class="row">
-                    <h1>main</h1>
+                    {% show_products limit=4 %}
                 </div>
             </div>
         </section>

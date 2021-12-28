@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load core_tags %}
+
+{% block content %}
+    <!-- Section-->
+        <section class="container py-5">
+            <div class="row g-5">
+              <div class="col-md-5 col-lg-4 order-md-last">
+                <ul class="list-group mb-3">
+                  <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                      <h6 class="my-0">Product name</h6>
+                      <small class="text-muted">Brief description</small>
+                    </div>
+                    <span class="text-muted">$12</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                      <h6 class="my-0">Second product</h6>
+                      <small class="text-muted">Brief description</small>
+                    </div>
+                    <span class="text-muted">$8</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                      <h6 class="my-0">Third item</h6>
+                      <small class="text-muted">Brief description</small>
+                    </div>
+                    <span class="text-muted">$5</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between bg-light">
+                    <div class="text-success">
+                      <h6 class="my-0">Promo code</h6>
+                      <small>EXAMPLECODE</small>
+                    </div>
+                    <span class="text-success">−$5</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between">
+                    <span>Total</span>
+                    <strong>{{cart.get_total_price}}</strong>
+                  </li>
+                </ul>
+
+                <form class="card p-2">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Promo code">
+                    <button type="submit" class="btn btn-secondary">Redeem</button>
+                  </div>
+                </form>
+              </div>
+              <div class="col-md-7 col-lg-8">
+                  <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Product</th>
+                          <th scope="col">Quantity</th>
+                          <th scope="col">Price</th>
+                          <th scope="col">Total Price</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          {% for item in cart %}
+                            {% with product=item.product %}
+                                <tr id="{{ product.slug }}">
+                                  <th scope="row">{{ product.name }}</th>
+                                  <td>{{ item.quantity }}</td>
+                                  <td>{{ item.price }}</td>
+                                  <td>{{ item.total_price }}</td>
+                                  <td>
+                                      <button class="btn btn-sm" onclick="delete_product_from_cart(url='{% url 'cart_delete' %}',product_slug='{{ product.slug }}')">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                              <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+                                              <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+                                          </svg>
+                                      </button>
+                                  </td>
+                                </tr>
+                            {% endwith %}
+                        {% endfor %}
+                      </tbody>
+                  </table>
+              </div>
+            </div>
+        </section>
+{% endblock content %}
